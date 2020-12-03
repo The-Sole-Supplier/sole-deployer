@@ -10,7 +10,7 @@ Base64 encoded config for the target Kubernetes cluster.
 
 ### `env_files`
 
-Space seperated list of .env files to be used during the dpeloyments. Provided paths should be relative to the root of the target repository.
+Space seperated list of .env files to be used during the deployments. Provided paths should be relative to the root of the target repository.
 
 ### `manifest_locations`
 
