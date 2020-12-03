@@ -17,9 +17,10 @@ Space seperated list of .env files to be used during the dpeloyments. Provided p
 Space seperated list of directories that contain Kubernetes manifest files to be applied during the dpeloyment. Provided paths should be relative to the root of the target repository.
 
 ## Example usage
-
+```
 uses: The-Sole-Supplier/sole-deployer@master
 with:
   kubeconfig_data: ${{ secrets.KUBE_CONFIG_QA }}
   env_files: ./cluster/env/global.env ./cluster/env/qa.env
   manifest_locations: ./cluster/core ./cluster/qa
+```
