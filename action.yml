@@ -1,0 +1,15 @@
+name: Sole Deployer
+description: Deploys Kubernetes and Terraform updates
+inputs:
+  kubeconfig_data:
+    description: Base64 encoded config for the target Kubernetes cluster
+    required: true
+  env_files:  # id of input
+    description: Comma-seperated list of .env files to use during deployment
+    required: true
+  manifest_locations:  # id of input
+    description: Comma-seperated list of directories containing Kubernetes manifest files to be applied to the target cluster
+    required: true
+runs:
+  using: docker
+  image: Dockerfile
