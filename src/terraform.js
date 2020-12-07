@@ -13,7 +13,10 @@ async function apply() {
 
   exec(`terraform init ${tfDir}`);
   exec(`terraform workspace select ${tfWorkspace} ${tfDir}`);
-  exec(`terraform apply -var-file=${tfVarFile} ${tfDir} -auto-approve`);
+
+  const varFileArg = tfVarFile ? '-var-file=${tfVarFile}' : '';
+
+  exec(`terraform apply ${varFileArg} ${tfDir} -auto-approve`);
 }
 
 module.exports = { apply };

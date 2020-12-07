@@ -4,19 +4,19 @@ inputs:
   kubeconfig_data:
     description: Base64 encoded config for the target Kubernetes cluster
     required: true
-  env_files:  # id of input
+  env_files:  
     description: Comma-seperated list of .env files to use during deployment
     required: true
-  manifest_locations:  # id of input
+  manifest_locations:  
     description: Comma-seperated list of directories containing Kubernetes manifest files to be applied to the target cluster
     required: true
-  terraform_directory:  # id of input
+  terraform_directory:  
     description: Directory containing Terraform files to be applied
     required: true
-  terraform_workspace:  # id of input
+  terraform_workspace:  
     description: The Terraform workspace of the changes to be applied
     required: true
-  terraform_var_file:  # id of input
+  terraform_var_file:  
     description: Location of the terraform var file
     required: true
 runs:
