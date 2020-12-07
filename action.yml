@@ -10,6 +10,15 @@ inputs:
   manifest_locations:  # id of input
     description: Comma-seperated list of directories containing Kubernetes manifest files to be applied to the target cluster
     required: true
+  terraform_directory:  # id of input
+    description: Directory containing Terraform files to be applied
+    required: true
+  terraform_workspace:  # id of input
+    description: The Terraform workspace of the changes to be applied
+    required: true
+  terraform_var_file:  # id of input
+    description: Location of the terraform var file
+    required: true
 runs:
   using: docker
   image: Dockerfile
