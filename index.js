@@ -1,4 +1,5 @@
 const dotenv = require('dotenv');
+const envsub = require('envsub');
 const fs = require('fs');
 const path = require('path');
 const shell = require('shelljs');
@@ -11,19 +12,27 @@ fs.writeFileSync(
 const envFiles = process.env.INPUT_ENV_FILES?.split(' ');
 const manifestLocations = process.env.INPUT_MANIFEST_LOCATIONS?.split(' ');
 
+function hasYamlExtension(path) {
+  return path.endsWith('.yml') || path.endsWith('.yaml');
+}
+
 function getManifestFiles(location) {
   const fullPath = path.resolve(process.cwd(), location);
 
+  if (hasYamlExtension(location)) return fullPath;
+
   return fs
     .readdirSync(fullPath)
-    .filter(
-      (filename) => filename.endsWith('.yml') || filename.endsWith('.yaml')
-    )
+    .filter(hasYamlExtension)
     .map((filename) => `${fullPath}/${filename}`);
 }
 
-function applyManifestFile(file) {
-  const { code } = shell.exec(`cat ${file} | envsubst | kubectl apply -f -`);
+async function applyManifestFile(templateFile) {
+  const outputFile = `${templateFile}_output`;
+
+  await envsub({ templateFile, outputFile });
+
+  const { code } = shell.exec(`kubectl apply -f ${outputFile}`);
 
   if (code !== 0) throw Error('Failed to apply mainfest file');
 }
