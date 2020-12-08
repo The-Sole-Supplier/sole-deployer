@@ -27,6 +27,10 @@ Name of the Terraform workspace to which the changes will be applied. Must be pr
 
 Path to the file that contains the Terraform variables that will be used during the deployment.
 
+### `dry_run`
+
+If `true` the Kubectl manifest files will be applied with `--dry-run=server` and Terraform changes will plan only.
+
 ## Example usage
 ```
 uses: The-Sole-Supplier/sole-deployer@master

@@ -5,6 +5,7 @@ const shell = require('shelljs');
 
 const manifestLocations = process.env.INPUT_MANIFEST_LOCATIONS?.split(' ');
 const kubeConfigData = process.env.INPUT_KUBECONFIG_DATA;
+const dryRun = process.env.INPUT_DRY_RUN === 'true';
 
 function hasYamlExtension(path) {
   return path.endsWith('.yml') || path.endsWith('.yaml');
@@ -26,7 +27,9 @@ async function applyManifestFile(templateFile) {
 
   await envsub({ templateFile, outputFile });
 
-  const { code } = shell.exec(`kubectl apply -f ${outputFile}`);
+  const dryRunArg = dryRun ? '--dry-run=server' : '';
+
+  const { code } = shell.exec(`kubectl apply ${dryRunArg} -f ${outputFile}`);
 
   if (code !== 0) throw Error('Failed to apply mainfest file');
 }

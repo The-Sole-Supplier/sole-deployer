@@ -19,6 +19,9 @@ inputs:
   terraform_var_file:  
     description: Location of the terraform var file
     required: false
+  dry_run:  
+    description: Run in dry_run mode. Kubectl manifest files will be applied with `--dry-run=server` and Terraform changes will plan only.
+    required: false
 runs:
   using: docker
   image: Dockerfile
