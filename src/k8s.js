@@ -34,7 +34,7 @@ async function applyManifestFile(templateFile) {
   if (code !== 0) throw Error('Failed to apply mainfest file');
 }
 
-function apply() {
+async function apply() {
   if (!manifestLocations)
     return console.log('No manifest locations were provided');
 
@@ -42,7 +42,9 @@ function apply() {
 
   fs.writeFileSync('/tmp/config', Buffer.from(kubeConfigData, 'base64'));
 
-  manifestLocations.flatMap(getManifestFiles).forEach(applyManifestFile);
+  await Promise.all(
+    manifestLocations.flatMap(getManifestFiles).map(applyManifestFile)
+  );
 
   console.log('Kubernetes manifest files applied');
 }

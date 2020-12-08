@@ -2,6 +2,14 @@ const env = require('./env');
 const kubernetes = require('./k8s');
 const terraform = require('./terraform');
 
-env.apply();
-kubernetes.apply();
-terraform.apply();
+async function run() {
+  await env.apply();
+  await kubernetes.apply();
+  await terraform.apply();
+}
+
+run().catch((err) => {
+  console.error('Sole Deployer failed with following error', err);
+
+  process.exitCode = 1;
+});
