@@ -17,7 +17,7 @@ async function apply() {
 
   const tfCommand = dryRun ? 'plan' : 'apply';
   const autoApproveArg = dryRun ? '' : '-auto-approve';
-  const varFileArg = tfVarFile ? '-var-file=${tfVarFile}' : '';
+  const varFileArg = tfVarFile ? `-var-file=${tfVarFile}` : '';
 
   exec(`terraform ${tfCommand} ${varFileArg} ${autoApproveArg} ${tfDir}`);
 }
