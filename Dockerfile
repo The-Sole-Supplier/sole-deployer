@@ -22,4 +22,4 @@ COPY /src ./src/
 RUN echo $KUBE_CONFIG_DATA | base64 -d > /tmp/config
 ENV KUBECONFIG=/tmp/config
 
-ENTRYPOINT ["node", "./src/index.js"]
+ENTRYPOINT ["node", "/src/index.js"]
