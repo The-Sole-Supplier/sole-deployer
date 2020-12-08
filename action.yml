@@ -2,23 +2,23 @@ name: Sole Deployer
 description: Deploys Kubernetes and Terraform updates
 inputs:
   kubeconfig_data:
-    description: Base64 encoded config for the target Kubernetes cluster
-    required: true
+    description: Base64 encoded config for the target Kubernetes cluster. Must be provided when manifest_locations is included.
+    required: false
   env_files:  
     description: Comma-seperated list of .env files to use during deployment
-    required: true
+    required: false
   manifest_locations:  
     description: Comma-seperated list of directories containing Kubernetes manifest files to be applied to the target cluster
-    required: true
+    required: false
   terraform_directory:  
     description: Directory containing Terraform files to be applied
-    required: true
+    required: false
   terraform_workspace:  
-    description: The Terraform workspace of the changes to be applied
-    required: true
+    description: The Terraform workspace of the changes to be applied. Must be provided when terraform_directory is included.
+    required: false
   terraform_var_file:  
     description: Location of the terraform var file
-    required: true
+    required: false
 runs:
   using: docker
   image: Dockerfile

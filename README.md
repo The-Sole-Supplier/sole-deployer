@@ -6,7 +6,7 @@ This action deploys changes to Kubernetes and Terraform together in a single ste
 
 ### `kubeconfig_data`
 
-Base64 encoded config for the target Kubernetes cluster.
+Base64 encoded config for the target Kubernetes cluster. Must be provided when `manifest_locations` is included.
 
 ### `env_files`
 
@@ -18,11 +18,11 @@ Space seperated list containing paths to Kubernetes manifest files, and/or direc
 
 ### `terraform_directory`
 
-Path to the directory that contains the Terraform file that will be applied during the deployment.
+Path to the directory that contains the Terraform files that will be applied during the deployment.
 
 ### `terraform_workspace`
 
-Name of the Terraform workspace to which the changes will be applied.
+Name of the Terraform workspace to which the changes will be applied. Must be provided when `terraform_directory` is included.
 ### `terraform_var_file`
 
 Path to the file that contains the Terraform variables that will be used during the deployment.
