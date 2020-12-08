@@ -16,10 +16,10 @@ async function apply() {
   exec(`terraform workspace select ${tfWorkspace} ${tfDir}`);
 
   const tfCommand = dryRun ? 'plan' : 'apply';
-  const autoApproveArg = dryRun ? '-auto-approve' : '';
+  const autoApproveArg = dryRun ? '' : '-auto-approve';
   const varFileArg = tfVarFile ? '-var-file=${tfVarFile}' : '';
 
-  exec(`terraform ${tfCommand} ${varFileArg} ${tfDir} ${autoApproveArg}`);
+  exec(`terraform ${tfCommand} ${varFileArg} ${autoApproveArg} ${tfDir}`);
 }
 
 module.exports = { apply };
