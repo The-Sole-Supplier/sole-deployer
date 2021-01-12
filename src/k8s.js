@@ -35,7 +35,7 @@ async function applyManifestFile(templateFile) {
 }
 
 async function apply() {
-  if (!manifestLocations)
+  if (!manifestLocations || !manifestLocations.length)
     return console.log('No manifest locations were provided');
 
   console.log('Applying Kubernetes manifest files');
