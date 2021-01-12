@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const shell = require('shelljs');
 
-const manifestLocations = process.env.INPUT_MANIFEST_LOCATIONS?.split(' ');
+const manifestLocations = process.env.INPUT_MANIFEST_LOCATIONS?.split(' ').filter(Boolean);
 const kubeConfigData = process.env.INPUT_KUBECONFIG_DATA;
 const dryRun = process.env.INPUT_DRY_RUN === 'true';
 
