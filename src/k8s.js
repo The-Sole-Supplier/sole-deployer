@@ -35,6 +35,7 @@ async function applyManifestFile(templateFile) {
 }
 
 async function apply() {
+  console.log('manifestLocations: ', manifestLocations);
   if (!manifestLocations || !manifestLocations.length)
     return console.log('No manifest locations were provided');
 
