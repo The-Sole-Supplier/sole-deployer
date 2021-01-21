@@ -3,7 +3,8 @@ const fs = require('fs');
 const path = require('path');
 const shell = require('shelljs');
 
-const manifestLocations = process.env.INPUT_MANIFEST_LOCATIONS?.split(' ').filter(Boolean);;
+const manifestLocations = process.env.INPUT_MANIFEST_LOCATIONS?.split(' ').filter(Boolean);
+const deploymentName = process.env.INPUT_DEPLOYMENT_NAME;
 const kubeConfigData = process.env.INPUT_KUBECONFIG_DATA;
 const dryRun = process.env.INPUT_DRY_RUN === 'true';
 
@@ -38,6 +39,10 @@ async function apply() {
   if (!manifestLocations || !manifestLocations.length)
     return console.log('No manifest locations were provided');
 
+  if (!deploymentName) {
+    return console.log('No kubernetes deployment name provided');
+  }
+
   console.log('Applying Kubernetes manifest files');
 
   fs.writeFileSync('/tmp/config', Buffer.from(kubeConfigData, 'base64'));
@@ -45,6 +50,10 @@ async function apply() {
   await Promise.all(
     manifestLocations.flatMap(getManifestFiles).map(applyManifestFile)
   );
+
+  const { code } = shell.exec(`kubectl rollout status deploy ${deploymentName}`);
+
+  if (code !== 0) throw Error(`${deploymentName} deployment failed`);
 
   console.log('Kubernetes manifest files applied');
 }
