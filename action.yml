@@ -7,7 +7,7 @@ inputs:
   env_files:
     description: Comma-seperated list of .env files to use during deployment
     required: false
-  deployment_name:
+  tracked_deployment_name:
     description: Name given to the kubernetes deployment. Used to track the deployment status.
     required: false
   manifest_locations:
